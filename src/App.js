@@ -158,12 +158,15 @@ function App(props) {
         <div className="descriptionBox">TASK  {taskList.length} </div>
         <div className="btnAdd" onClick={addTasks}>+</div>
       </div>
+      
       {showtask &&
         <div className="taskFields">
+
           <div className="fieldView" >
             <label className="taskName">Task Description</label>
             <input className="tasknameInput" onChange={(e) => checkValidation(e, "description")} value={task.description.value} />
           </div>
+
           <div className="dateTime">
             <div className="fielddateView">
               <label className="taskName">Date</label>
@@ -174,6 +177,7 @@ function App(props) {
               <input className="taskTime" type="time" step="2" onChange={(e) => checkValidation(e, "time")} value={task.time.value} />
             </div>
           </div>
+
           <div className="fieldView" >
             <label className="taskName">Assign User</label>
             <select className="tasknameInput" onChange={(e) => checkValidation(e, "assignuser")} value={task.assignuser.value} >
@@ -184,15 +188,15 @@ function App(props) {
               })}
             </select >
           </div>
+
           <div className="customBtn">
-            {/* <div className="removebtnview"> */}
             {remove && <img src={Remove} className="removeIcon" onClick={deletedTask} />}
-            {/* </div> */}
             <div className="btn_view">
               <button className="cancelBtn" onClick={handleCancel}>Cancel</button>
               <button className="saveBtn" onClick={() => onsubmit(updatebtn ? "update" : "")}>Save</button>
             </div>
           </div>
+
         </div>
       }
       {showAddtask &&
@@ -200,6 +204,7 @@ function App(props) {
           {taskList.map((data, index) => {
             return (
               <div className="addingTask" onMouseLeave={() => setShowEdit()}>
+
                 <div className="prof_Name">
                   <img src={User} className="img_view" />
                   <div>
@@ -207,11 +212,13 @@ function App(props) {
                     <div>{data.task_date}</div>
                   </div>
                 </div>
+
                 <div className="taskicons"  >
                   {showEdit === index ? <img src={Edit} className="editIcon" onClick={() => editTasklist(index)} /> : null}
                   <img src={Bell} className="bellIcon" onMouseEnter={() => handlemouseEnter(index)} />
                   <img src={OkIcon} className="okIcon" />
                 </div>
+
               </div>
             )
           })
@@ -223,10 +230,7 @@ function App(props) {
 }
 
 const mapStateToProps = (state) =>
-
-(
-  console.log(state, "kra"),
-  {
-    GetTask: state.TaskReducer.getAddtask
-  });
+({
+  GetTask: state.TaskReducer.getAddtask
+});
 export default connect(mapStateToProps)(App);
