@@ -12,7 +12,6 @@ export default function (state = initialState, action) {
                 ...state,
                 getAddtask: action.payload
             }
-
         default:
             return state;
     }

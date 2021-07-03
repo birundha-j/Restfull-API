@@ -1,8 +1,7 @@
-import react, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css';
 import { useDispatch, connect } from "react-redux";
 import { addTask, getAddtask, updateTask, deleteTask } from './Redux/Action/taskAction';
-import Profile from '../src/Images/Profiles.jpg';
 import Bell from '../src/Images/bell.svg';
 import OkIcon from '../src/Images/okicon.svg';
 import Edit from './Images/EditIcon.svg';
@@ -111,122 +110,124 @@ function App(props) {
   const handleCancel = () => {
     let Form_key = ["description", "date", "time", "assignuser"];
     Form_key.map((data) => {
-      task[data].value = "";
-    });
-    setTask((prevState) => ({
-      ...prevState,
-    }));
-  };
+      return (
+        task[data].value = ""
+      )
+  });
+  setTask((prevState) => ({
+    ...prevState,
+  }));
+};
 
-  const handlemouseEnter = (id) => {
-    setShowEdit(id)
-  }
+const handlemouseEnter = (id) => {
+  setShowEdit(id)
+}
 
-  const editTasklist = (id) => {
-    setIndexrow(id)
-    setRemove(true)
-    setShowtask(true)
-    setShowAddtask(false)
-    setUpdatebtn(true)
+const editTasklist = (id) => {
+  setIndexrow(id)
+  setRemove(true)
+  setShowtask(true)
+  setShowAddtask(false)
+  setUpdatebtn(true)
 
-    let d = new Date(taskList[id].task_time * 1000).toISOString().substr(11, 8)
+  let customtime = new Date(taskList[id].task_time * 1000).toISOString().substr(11, 8)
 
-    task.description.value = taskList[id].task_msg
-    task.date.value = taskList[id].task_date
-    task.time.value = d
-    task.assignuser.value = taskList[id].assigned_user
+  task.description.value = taskList[id].task_msg
+  task.date.value = taskList[id].task_date
+  task.time.value = customtime
+  task.assignuser.value = taskList[id].assigned_user
 
-    setTask((prevState) => ({
-      ...prevState,
+  setTask((prevState) => ({
+    ...prevState,
 
-    }));
-  }
+  }));
+}
 
-  const deletedTask = () => {
-    dispatch(deleteTask(taskList[indexrow].id)).then(res => {
-      alert("Are you sure you want to delete this task")
-      handleCancel()
-    })
-    setShowtask(false)
-    setShowAddtask(true)
-  }
+const deletedTask = () => {
+  dispatch(deleteTask(taskList[indexrow].id)).then(res => {
+    alert("Are you sure you want to delete this task")
+    handleCancel()
+  })
+  setShowtask(false)
+  setShowAddtask(true)
+}
 
 
-  return (
-    <div className="container">
-      <div className="taskDescription">
-        <div className="descriptionBox">TASK  {taskList.length} </div>
-        <div className="btnAdd" onClick={addTasks}>+</div>
-      </div>
-      
-      {showtask &&
-        <div className="taskFields">
-
-          <div className="fieldView" >
-            <label className="taskName">Task Description</label>
-            <input className="tasknameInput" onChange={(e) => checkValidation(e, "description")} value={task.description.value} />
-          </div>
-
-          <div className="dateTime">
-            <div className="fielddateView">
-              <label className="taskName">Date</label>
-              <input className="taskDate" type="date" onChange={(e) => checkValidation(e, "date")} value={task.date.value} />
-            </div>
-            <div className="fielddateView">
-              <label className="taskName">Time</label>
-              <input className="taskTime" type="time" step="2" onChange={(e) => checkValidation(e, "time")} value={task.time.value} />
-            </div>
-          </div>
-
-          <div className="fieldView" >
-            <label className="taskName">Assign User</label>
-            <select className="tasknameInput" onChange={(e) => checkValidation(e, "assignuser")} value={task.assignuser.value} >
-              {assignuser.map((val) => {
-                return (
-                  <option >{val.value}</option>
-                )
-              })}
-            </select >
-          </div>
-
-          <div className="customBtn">
-            {remove && <img src={Remove} className="removeIcon" onClick={deletedTask} />}
-            <div className="btn_view">
-              <button className="cancelBtn" onClick={handleCancel}>Cancel</button>
-              <button className="saveBtn" onClick={() => onsubmit(updatebtn ? "update" : "")}>Save</button>
-            </div>
-          </div>
-
-        </div>
-      }
-      {showAddtask &&
-        <>
-          {taskList.map((data, index) => {
-            return (
-              <div className="addingTask" onMouseLeave={() => setShowEdit()}>
-
-                <div className="prof_Name">
-                  <img src={User} className="img_view" />
-                  <div>
-                    <div>{data.task_msg}</div>
-                    <div>{data.task_date}</div>
-                  </div>
-                </div>
-
-                <div className="taskicons"  >
-                  {showEdit === index ? <img src={Edit} className="editIcon" onClick={() => editTasklist(index)} /> : null}
-                  <img src={Bell} className="bellIcon" onMouseEnter={() => handlemouseEnter(index)} />
-                  <img src={OkIcon} className="okIcon" />
-                </div>
-
-              </div>
-            )
-          })
-          }
-        </>
-      }
+return (
+  <div className="container">
+    <div className="taskDescription">
+      <div className="descriptionBox">TASK  {taskList.length} </div>
+      <div className="btnAdd" onClick={addTasks}>+</div>
     </div>
-  );
+
+    {showtask &&
+      <div className="taskFields">
+
+        <div className="fieldView" >
+          <label className="taskName">Task Description</label>
+          <input className="tasknameInput" onChange={(e) => checkValidation(e, "description")} value={task.description.value} />
+        </div>
+
+        <div className="dateTime">
+          <div className="fielddateView">
+            <label className="taskName">Date</label>
+            <input className="taskDate" type="date" onChange={(e) => checkValidation(e, "date")} value={task.date.value} />
+          </div>
+          <div className="fielddateView">
+            <label className="taskName">Time</label>
+            <input className="taskTime" type="time" step="2" onChange={(e) => checkValidation(e, "time")} value={task.time.value} />
+          </div>
+        </div>
+
+        <div className="fieldView" >
+          <label className="taskName">Assign User</label>
+          <select className="tasknameInput" onChange={(e) => checkValidation(e, "assignuser")} value={task.assignuser.value} >
+            {assignuser.map((val) => {
+              return (
+                <option >{val.value}</option>
+              )
+            })}
+          </select >
+        </div>
+
+        <div className="customBtn">
+          {remove && <img alt="Girl in a jacket" src={Remove} className="removeIcon" onClick={deletedTask} />}
+          <div className="btn_view">
+            <button className="cancelBtn" onClick={handleCancel}>Cancel</button>
+            <button className="saveBtn" onClick={() => onsubmit(updatebtn ? "update" : "")}>Save</button>
+          </div>
+        </div>
+
+      </div>
+    }
+    {showAddtask &&
+      <>
+        {taskList.map((data, index) => {
+          return (
+            <div className="addingTask" onMouseLeave={() => setShowEdit()}>
+
+              <div className="prof_Name">
+                <img alt="Girl in a jacket" src={User} className="img_view" />
+                <div>
+                  <div>{data.task_msg}</div>
+                  <div>{data.task_date}</div>
+                </div>
+              </div>
+
+              <div className="taskicons"  >
+                {showEdit === index ? <img alt="Girl in a jacket" src={Edit} className="editIcon" onClick={() => editTasklist(index)} /> : null}
+                <img alt="Girl in a jacket" src={Bell} className="bellIcon" onMouseEnter={() => handlemouseEnter(index)} />
+                <img alt="Girl in a jacket" src={OkIcon} className="okIcon" />
+              </div>
+
+            </div>
+          )
+        })
+        }
+      </>
+    }
+  </div>
+);
 }
 
 const mapStateToProps = (state) =>
