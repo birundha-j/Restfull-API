@@ -1,38 +1,168 @@
-.App {
-  text-align: center;
+.container{
+  width: 27%;
+  margin: auto;
+  margin-top: 100px;
+  padding: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.taskDescription{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.descriptionBox{
+  width: 90%;
+  border: 1px solid rgb(170, 168, 168);
+  padding: 10px 20px;
+  border-right: none;
+}
+
+.btnAdd{
+  width: 10%;
+  font-size: 30px;
+  text-align: center;
+  border: 1px solid rgb(170, 168, 168);
+  cursor: pointer;
+}
+
+/* taskShow */
+
+.taskFields{
+  border: 1px solid rgb(170, 168, 168);
+  padding: 20px;
+  background: #f3f3f3;
+  border-top: none;
+}
+.fieldView{
+  margin: 10px 0px;
+}
+
+.fielddateView{
+  margin: 10px 0px;
+  width: 50%;
+}
+
+.taskName{
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.tasknameInput{
+  width: 97%;
+  height: 32px;
+  margin-top: 10px;
+  border-radius: 5px ;
+  border: 1px solid gray;
+}
+
+.dateTime{
+  display: flex;
+}
+
+.taskDate{
+  height: 32px;
+  width: 92%;
+  margin-top: 10px;
+  border-radius: 5px ;
+  border: 1px solid gray;
+}
+
+.taskTime{
+  height: 32px;
+  width: 95%;
+  margin-top: 10px;
+  border-radius: 5px ;
+  border: 1px solid gray; 
+}
+
+.customBtn{
+  padding: 5px 0px;
+  text-align: right;
+  margin-top: 25px;
+  display: flex;
+}
+
+.btn_view{
+  width: 85%;
+}
+
+.removebtnview{
+  width: 15%;
+}
+
+.cancelBtn{
+  width: 30%;
+  margin: 0px 10px;
+  height: 32px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-weight: 600;
+  border: 1px solid rgb(131, 134, 131);
+  border-radius: 8px;
+}
+
+.saveBtn{
+  width: 30%;
+  margin: 0px 10px;
+  height: 32px;
+  background-color: rgb(77 195 77);
+  border: 1px solid rgb(10, 105, 10);
+  border-radius: 8px;
+  cursor: pointer;
   color: white;
+  font-weight: 600;
 }
 
-.App-link {
-  color: #61dafb;
+.removeIcon{
+  width: 4%;
+  padding: 3px 15px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* addingTask */
+
+.addingTask{
+  border: 1px solid rgb(170, 168, 168);
+  padding: 10px 20px;
+  display: flex;
+  height: 40px;
+  margin: 5px 0px;
+}
+
+.prof_Name{
+  width: 40%;
+  display: flex;
+
+}
+
+.img_view{
+  width: 23%;
+  margin-right: 10px;
+}
+
+.taskicons{
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.editIcon{
+  width: 5%;
+  border: 1px solid gray;
+  padding: 3px 15px;
+  margin-right: 10px;
+}
+
+.bellIcon{
+  width: 5%;
+  border: 1px solid gray;
+  padding: 3px 15px;
+  border-right: none;
+}
+
+.okIcon{
+  width: 5%;
+  border: 1px solid gray;
+  padding: 3px 15px;
 }
