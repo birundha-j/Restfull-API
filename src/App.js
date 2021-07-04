@@ -30,7 +30,7 @@ function App(props) {
   const [showAddtask, setShowAddtask] = useState(true)
   const [assignuser, setAssignuser] = useState({})
   const [taskList, setTaskList] = useState([])
-  const [showEdit, setShowEdit] = useState(false)
+  const [showEdit, setShowEdit] = useState()
   const [remove, setRemove] = useState(false)
   const [updatebtn, setUpdatebtn] = useState(false)
   const [indexrow, setIndexrow] = useState()
