@@ -31,14 +31,15 @@
 .descriptionBox {
   width: 90%;
   border: 1px solid rgb(212, 210, 210);
-  padding: 10px 20px;
+  /* padding: 20px 20px; */
   border-right: none;
   border-top-left-radius: 4px;
+  padding: 8px 10px;
 }
 
 .btnAdd {
   width: 10%;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
   border: 1px solid rgb(212, 210, 210);
   cursor: pointer;
@@ -49,7 +50,7 @@
 .taskFields {
   border: 1px solid rgb(212, 210, 210);
   padding: 1px 20px;
-  background: #ceebf9;
+  background: #ebf7fd;
   border-top: none;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -63,10 +64,10 @@
   width: 50%;
 }
 
-.taskName {
+/* .taskName { */
   /* margin-bottom: 10px;
   font-weight: 500; */
-}
+/* } */
 
 .tasknameInput {
   width: 97%;
