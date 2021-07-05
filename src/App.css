@@ -198,8 +198,23 @@
   position: absolute;
   z-index: 1;
   bottom: 125%;
-  left: 80%;
   margin-left: -60px;
+}
+
+.addTaskPosition{
+  left: 100%;
+}
+
+.editTaskPosition{
+  left: 80%;
+}
+
+.deleteTaskPosition{
+  left: 85%;
+}
+
+.tooltip .tooltiptext.bellTaskPosition::after{
+  left: 18%;
 }
 
 .tooltip .tooltiptext::after {

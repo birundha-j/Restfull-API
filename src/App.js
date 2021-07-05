@@ -146,7 +146,7 @@ function App(props) {
 
   const deletedTask = () => {
     dispatch(deleteTask(taskList[indexrow].id)).then(res => {
-      alert("Are you sure you want to delete this task")
+      alert("Are you sure you want to delete this task?")
       handleCancel()
     })
     setShowtask(false)
@@ -159,7 +159,7 @@ function App(props) {
       <div className="taskDescription">
         <div className="descriptionBox">TASKS  {taskList.length} </div>
         <div className="btnAdd tooltip" onClick={addTasks}>+
-          <span className="tooltiptext">New Task</span>
+          <span className="tooltiptext addTaskPosition">New Task</span>
         </div>
       </div>
 
@@ -196,7 +196,7 @@ function App(props) {
           <div className="customBtn">
             {remove && <div className="removeIcon tooltip" onClick={deletedTask}>
               <img src={Remove} />
-              <span className="tooltiptext">Delete Task</span>
+              <span className="tooltiptext deleteTaskPosition">Delete Task</span>
             </div>}
             <div className="btn_view">
               <button className="cancelBtn" onClick={handleCancel}>Cancel</button>
@@ -222,11 +222,11 @@ function App(props) {
 
                 <div className="taskicons"  >
                   {showEdit === index ? <div className="editIcon tooltip" onClick={() => editTasklist(index)}><div className="editIconshow">✎</div>
-                    <span className="tooltiptext">Edit This Task</span>
+                    <span className="tooltiptext editTaskPosition">Edit Task</span>
                   </div> : null}
                   <div className="bellIcon tooltip" onMouseEnter={() => handlemouseEnter(index)}>
                     <img src={Bell} />
-                    <span className="tooltiptext">Snooze this Task to appear in your at a later date</span>
+                    <span className="tooltiptext bellTaskPosition">Snooze this Task to appear in your at a later date</span>
                   </div>
                   <img src={OkIcon} className="okIcon" />
                 </div>
