@@ -1,120 +1,122 @@
-.container{
+.container {
   width: 27%;
-  margin: auto;
   margin-top: 100px;
   padding: 10px;
 }
 
-.taskDescription{
+.taskDescription {
   display: flex;
   font-weight: 600;
 }
 
-.descriptionBox{
+.descriptionBox {
   width: 90%;
-  border: 1px solid rgb(170, 168, 168);
+  border: 1px solid rgb(212, 210, 210);
   padding: 10px 20px;
   border-right: none;
 }
 
-.btnAdd{
+.btnAdd {
   width: 10%;
   font-size: 30px;
   text-align: center;
-  border: 1px solid rgb(170, 168, 168);
+  border: 1px solid rgb(212, 210, 210);
   cursor: pointer;
 }
 
 /* taskShow */
 
-.taskFields{
-  border: 1px solid rgb(170, 168, 168);
+.taskFields {
+  border: 1px solid rgb(212, 210, 210);
   padding: 20px;
-  background: #f3f3f3;
+  background: #ceebf9;
   border-top: none;
 }
-.fieldView{
+.fieldView {
   margin: 10px 0px;
 }
 
-.fielddateView{
+.fielddateView {
   margin: 10px 0px;
   width: 50%;
 }
 
-.taskName{
+.taskName {
   margin-bottom: 10px;
   font-weight: 500;
 }
 
-.tasknameInput{
+.tasknameInput {
   width: 97%;
   height: 32px;
   margin-top: 10px;
-  border-radius: 5px ;
-  border: 1px solid gray;
+  border-radius: 5px;
+  border: 1px solid rgb(212, 210, 210);
 }
 
-.dateTime{
+.dateTime {
   display: flex;
 }
 
-.taskDate{
+.taskDate {
   height: 32px;
   width: 92%;
   margin-top: 10px;
-  border-radius: 5px ;
-  border: 1px solid gray;
+  border-radius: 5px;
+  border: 1px solid rgb(212, 210, 210);
+  font-family: unset;
+  text-transform: uppercase;
 }
 
-.taskTime{
+.taskTime {
   height: 32px;
   width: 95%;
   margin-top: 10px;
-  border-radius: 5px ;
-  border: 1px solid gray; 
+  border-radius: 5px;
+  border: 1px solid rgb(212, 210, 210);
+  font-family: unset;
 }
 
-.customBtn{
+.customBtn {
   padding: 5px 0px;
   text-align: right;
   margin-top: 25px;
   display: flex;
+  justify-content: flex-end;
 }
 
-.btn_view{
+.btn_view {
   width: 85%;
 }
 
-.removebtnview{
+.removebtnview {
   width: 15%;
 }
 
-.cancelBtn{
+.cancelBtn {
   width: 30%;
   margin: 0px 10px;
-  height: 32px;
+  height: 38px;
   cursor: pointer;
   border: none;
   background: none;
   font-weight: 600;
-  border: 1px solid rgb(131, 134, 131);
   border-radius: 8px;
 }
 
-.saveBtn{
+.saveBtn {
   width: 30%;
   margin: 0px 10px;
-  height: 32px;
-  background-color: rgb(77 195 77);
-  border: 1px solid rgb(10, 105, 10);
-  border-radius: 8px;
+  height: 38px;
+  background-color: rgb(62 152 62);
+  border: 1px solid rgb(212, 210, 210);
+  border-radius: 5px;
   cursor: pointer;
   color: white;
   font-weight: 600;
 }
 
-.removeIcon{
+.removeIcon {
   width: 4%;
   padding: 3px 15px;
   margin-right: 10px;
@@ -123,47 +125,99 @@
 
 /* addingTask */
 
-.addingTask{
-  border: 1px solid rgb(170, 168, 168);
+.addingTask {
+  border: 1px solid rgb(212, 210, 210);
   padding: 10px 20px;
   display: flex;
   height: 40px;
   margin: 5px 0px;
 }
 
-.prof_Name{
-  width: 40%;
+.prof_Name {
+  width: 50%;
   display: flex;
-
 }
 
-.img_view{
+.img_view {
   width: 23%;
   margin-right: 10px;
 }
 
-.taskicons{
-  width: 60%;
+.showTaskname {
+  font-weight: 500;
+  color: rgb(95, 92, 92);
+}
+
+.showTaskdate {
+  color: rgb(236, 13, 13);
+}
+
+.taskicons {
+  width: 50%;
   display: flex;
   justify-content: flex-end;
 }
 
-.editIcon{
+.editIcon {
   width: 5%;
-  border: 1px solid gray;
-  padding: 3px 15px;
+  border: 1px solid rgb(212, 210, 210);
+  padding: 2px 15px;
   margin-right: 10px;
+  cursor: pointer;
+}
+.editIconshow {
+  transform: rotate(80deg);
+  padding: 2px;
 }
 
-.bellIcon{
+.bellIcon {
   width: 5%;
-  border: 1px solid gray;
-  padding: 3px 15px;
+  border: 1px solid rgb(212, 210, 210);
+  padding: 8px 15px 2px 15px;
   border-right: none;
 }
 
-.okIcon{
+.okIcon {
   width: 5%;
-  border: 1px solid gray;
-  padding: 3px 15px;
+  border: 1px solid rgb(212, 210, 210);
+  padding: 2px 15px;
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 80%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  font-size: 13px;
+  white-space: nowrap;
+  padding: 7px 10px;
+}
+/* 
+ */
