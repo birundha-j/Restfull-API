@@ -1,5 +1,24 @@
 .container {
-  width: 27%;
+  display: flex;
+}
+
+.leftBorder {
+  width: 200px;
+  height: 100vh;
+  background-color: #333750;
+}
+
+.taskHeaderContainer {
+  width: 100%;
+}
+
+.header {
+  height: 6%;
+  box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 75%);
+}
+
+.taskContainer {
+  width: 25em;
   margin-top: 100px;
   padding: 10px;
 }
@@ -14,6 +33,7 @@
   border: 1px solid rgb(212, 210, 210);
   padding: 10px 20px;
   border-right: none;
+  border-top-left-radius: 4px;
 }
 
 .btnAdd {
@@ -28,9 +48,11 @@
 
 .taskFields {
   border: 1px solid rgb(212, 210, 210);
-  padding: 20px;
+  padding: 1px 20px;
   background: #ceebf9;
   border-top: none;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 .fieldView {
   margin: 10px 0px;
@@ -42,14 +64,14 @@
 }
 
 .taskName {
-  margin-bottom: 10px;
-  font-weight: 500;
+  /* margin-bottom: 10px;
+  font-weight: 500; */
 }
 
 .tasknameInput {
   width: 97%;
   height: 32px;
-  margin-top: 10px;
+  margin-top: 5px;
   border-radius: 5px;
   border: 1px solid rgb(212, 210, 210);
 }
@@ -80,13 +102,17 @@
 .customBtn {
   padding: 5px 0px;
   text-align: right;
-  margin-top: 25px;
+  margin-top: 20px;
   display: flex;
   justify-content: flex-end;
 }
 
 .btn_view {
   width: 85%;
+}
+
+.btn_view button{
+  height: 32px;
 }
 
 .removebtnview {
@@ -107,7 +133,6 @@
 .saveBtn {
   width: 30%;
   margin: 0px 10px;
-  height: 38px;
   background-color: rgb(62 152 62);
   border: 1px solid rgb(212, 210, 210);
   border-radius: 5px;
@@ -131,6 +156,7 @@
   display: flex;
   height: 40px;
   margin: 5px 0px;
+  border-radius: 4px;
 }
 
 .prof_Name {
@@ -164,6 +190,7 @@
   padding: 2px 15px;
   margin-right: 10px;
   cursor: pointer;
+  border-radius: 4px;
 }
 .editIconshow {
   transform: rotate(80deg);
@@ -171,21 +198,27 @@
 }
 
 .bellIcon {
-  width: 5%;
+  width: 10px;
   border: 1px solid rgb(212, 210, 210);
   padding: 8px 15px 2px 15px;
   border-right: none;
+  border-top-right-radius: 0px !important;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
 }
 
 .okIcon {
-  width: 5%;
+  width: 10px;
   border: 1px solid rgb(212, 210, 210);
   padding: 2px 15px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .tooltip {
   position: relative;
   display: inline-block;
+  border-top-right-radius: 4px;
 }
 
 .tooltip .tooltiptext {
@@ -201,19 +234,19 @@
   margin-left: -60px;
 }
 
-.addTaskPosition{
+.addTaskPosition {
   left: 100%;
 }
 
-.editTaskPosition{
+.editTaskPosition {
   left: 100%;
 }
 
-.deleteTaskPosition{
+.deleteTaskPosition {
   left: 85%;
 }
 
-.tooltip .tooltiptext.bellTaskPosition::after{
+.tooltip .tooltiptext.bellTaskPosition::after {
   left: 18%;
 }
 

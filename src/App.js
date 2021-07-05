@@ -152,91 +152,95 @@ function App(props) {
     setShowtask(false)
     setShowAddtask(true)
   }
-
-
   return (
     <div className="container">
-      <div className="taskDescription">
-        <div className="descriptionBox">TASKS  {taskList.length} </div>
-        <div className="btnAdd tooltip" onClick={addTasks}>+
-          <span className="tooltiptext addTaskPosition">New Task</span>
+      <div className="leftBorder" />
+      <div className="taskHeaderContainer">
+        <div className="header" />
+        <div className="taskContainer">
+          <div className="taskDescription">
+            <div className="descriptionBox">TASKS  {taskList.length} </div>
+            <div className="btnAdd tooltip" onClick={addTasks}>+
+              <span className="tooltiptext addTaskPosition">New Task</span>
+            </div>
+          </div>
+
+          {showtask &&
+            <div className="taskFields">
+
+              <div className="fieldView" >
+                <label className="taskName">Task Description</label>
+                <input className="tasknameInput" onChange={(e) => checkValidation(e, "description")} value={task.description.value} />
+              </div>
+
+              <div className="dateTime">
+                <div className="fielddateView">
+                  <label className="taskName">Date</label>
+                  <input className="taskDate" type="date" onChange={(e) => checkValidation(e, "date")} value={task.date.value} />
+                </div>
+                <div className="fielddateView">
+                  <label className="taskName">Time</label>
+                  <input className="taskTime" type="time" step="2" onChange={(e) => checkValidation(e, "time")} value={task.time.value} />
+                </div>
+              </div>
+
+              <div className="fieldView" >
+                <label className="taskName">Assign User</label>
+                <select className="tasknameInput" onChange={(e) => checkValidation(e, "assignuser")} value={task.assignuser.value} >
+                  {assignuser.map((val) => {
+                    return (
+                      <option >{val.value}</option>
+                    )
+                  })}
+                </select >
+              </div>
+
+              <div className="customBtn">
+                {remove && <div className="removeIcon tooltip" onClick={deletedTask}>
+                  <img src={Remove} />
+                  <span className="tooltiptext deleteTaskPosition">Delete Task</span>
+                </div>}
+                <div className="btn_view">
+                  <button className="cancelBtn" onClick={handleCancel}>Cancel</button>
+                  <button className="saveBtn" onClick={() => onsubmit(updatebtn ? "update" : "")}>Save</button>
+                </div>
+              </div>
+
+            </div>
+          }
+          {showAddtask &&
+            <>
+              {taskList.map((data, index) => {
+                return (
+                  <div className="addingTask" onMouseLeave={() => setShowEdit()}>
+
+                    <div className="prof_Name">
+                      <img src={User} className="img_view" />
+                      <div>
+                        <div className="showTaskname">{data.task_msg}</div>
+                        <div className="showTaskdate">{`${new Date(data.task_date).getDate()}/${new Date(data.task_date).getMonth() + 1}/${new Date(data.task_date).getFullYear()}`}</div>
+                      </div>
+                    </div>
+
+                    <div className="taskicons"  >
+                      {showEdit === index ? <div className="editIcon tooltip" onClick={() => editTasklist(index)}><div className="editIconshow">✎</div>
+                        <span className="tooltiptext editTaskPosition">Edit Task</span>
+                      </div> : null}
+                      <div className="bellIcon tooltip" onMouseEnter={() => handlemouseEnter(index)}>
+                        <img src={Bell} />
+                        <span className="tooltiptext bellTaskPosition">Snooze this Task to appear in your at a later date</span>
+                      </div>
+                      <img src={OkIcon} className="okIcon" />
+                    </div>
+
+                  </div>
+                )
+              })
+              }
+            </>
+          }
         </div>
       </div>
-
-      {showtask &&
-        <div className="taskFields">
-
-          <div className="fieldView" >
-            <label className="taskName">Task Description</label>
-            <input className="tasknameInput" onChange={(e) => checkValidation(e, "description")} value={task.description.value} />
-          </div>
-
-          <div className="dateTime">
-            <div className="fielddateView">
-              <label className="taskName">Date</label>
-              <input className="taskDate" type="date" onChange={(e) => checkValidation(e, "date")} value={task.date.value} />
-            </div>
-            <div className="fielddateView">
-              <label className="taskName">Time</label>
-              <input className="taskTime" type="time" step="2" onChange={(e) => checkValidation(e, "time")} value={task.time.value} />
-            </div>
-          </div>
-
-          <div className="fieldView" >
-            <label className="taskName">Assign User</label>
-            <select className="tasknameInput" onChange={(e) => checkValidation(e, "assignuser")} value={task.assignuser.value} >
-              {assignuser.map((val) => {
-                return (
-                  <option >{val.value}</option>
-                )
-              })}
-            </select >
-          </div>
-
-          <div className="customBtn">
-            {remove && <div className="removeIcon tooltip" onClick={deletedTask}>
-              <img src={Remove} />
-              <span className="tooltiptext deleteTaskPosition">Delete Task</span>
-            </div>}
-            <div className="btn_view">
-              <button className="cancelBtn" onClick={handleCancel}>Cancel</button>
-              <button className="saveBtn" onClick={() => onsubmit(updatebtn ? "update" : "")}>Save</button>
-            </div>
-          </div>
-
-        </div>
-      }
-      {showAddtask &&
-        <>
-          {taskList.map((data, index) => {
-            return (
-              <div className="addingTask" onMouseLeave={() => setShowEdit()}>
-
-                <div className="prof_Name">
-                  <img src={User} className="img_view" />
-                  <div>
-                    <div className="showTaskname">{data.task_msg}</div>
-                    <div className="showTaskdate">{`${new Date(data.task_date).getDate()}/${new Date(data.task_date).getMonth() + 1}/${new Date(data.task_date).getFullYear()}`}</div>
-                  </div>
-                </div>
-
-                <div className="taskicons"  >
-                  {showEdit === index ? <div className="editIcon tooltip" onClick={() => editTasklist(index)}><div className="editIconshow">✎</div>
-                    <span className="tooltiptext editTaskPosition">Edit Task</span>
-                  </div> : null}
-                  <div className="bellIcon tooltip" onMouseEnter={() => handlemouseEnter(index)}>
-                    <img src={Bell} />
-                    <span className="tooltiptext bellTaskPosition">Snooze this Task to appear in your at a later date</span>
-                  </div>
-                  <img src={OkIcon} className="okIcon" />
-                </div>
-
-              </div>
-            )
-          })
-          }
-        </>
-      }
     </div>
   );
 }
