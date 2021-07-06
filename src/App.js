@@ -1,15 +1,14 @@
 import { useState, useEffect, useCallback } from 'react'
-import './App.css';
 import { useDispatch, connect } from "react-redux";
 import { addTask, getAddtask, updateTask, deleteTask } from './Redux/Action/taskAction';
 import Bell from '../src/Images/bell.svg';
 import OkIcon from '../src/Images/okicon.svg';
 import Remove from './Images/remove.svg';
-import User from './Images/user.svg';
+import User from './Images/profilepic.jpg';
 import Clock from './Images/clock.svg';
-import Calender from './Images/calender.png'
+import Calender from './Images/calender.png';
+import './App.css';
 
-const AccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjUyNDAzMTEsIm5iZiI6MTYyNTI0MDMxMSwianRpIjoiZjNlYjgzYTgtMjM4Ny00ZDM5LWIwYmEtNDZlZmU1MGZhZThlIiwiaWRlbnRpdHkiOnsibmFtZSI6IlN1YmkgU2lyIiwiZW1haWwiOiJzbWl0aGNoZXJ5bEB5YWhvby5jb20iLCJ1c2VyX2lkIjoidXNlcl82YmVlYzQ1OTkxNWY0NTA3YThkMjUyMGU2MGUwM2MzZSIsImNvbXBhbnlfaWQiOiJjb21wYW55XzNjNjhjZDk0ZWJkNjQ4Yzc4ZDc2ODcyY2ZhOWY4Y2ZiIiwiaWNvbiI6Imh0dHA6Ly93d3cuZ3JhdmF0YXIuY29tL2F2YXRhci9mMmU5YWNkZWM4MTdlMjRkMjk4MGQ4NTNlODkzODVmNT9kZWZhdWx0PWh0dHBzJTNBJTJGJTJGczMuc2xvb3ZpLmNvbSUyRmF2YXRhci1kZWZhdWx0LWljb24ucG5nIiwiYnlfZGVmYXVsdCI6Im91dHJlYWNoIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.pQSfEzNzYv_IVtPFkUKFucl1SSIqpmKnx4Jlxdhi7IY";
 
 const UserId = "user_6beec459915f4507a8d2520e60e03c3e";
 
@@ -25,7 +24,6 @@ const AssignUser = [{
   user_status: "pending"
 }]
 
-const timeFormat = ["7:00 am", "7:30 am", "8:00 am", "8:30 am"]
 
 function App(props) {
   const dispatch = useDispatch();
@@ -38,6 +36,7 @@ function App(props) {
   const [updatebtn, setUpdatebtn] = useState(false)
   const [indexrow, setIndexrow] = useState()
   const [showDropdown, setShowDropdown] = useState(false)
+  const [timeOption, setTimeOption] = useState([])
   const [task, setTask] = useState({
     description: { value: "" },
     date: { value: "" },
@@ -59,7 +58,6 @@ function App(props) {
 
 
   useEffect(() => {
-
     setTaskList(props.GetTask)
   }, [props.GetTask])
 
@@ -68,33 +66,12 @@ function App(props) {
     let dynObj = {
       value: data.target.value,
     };
-
-
     setTask((prevState) => ({
       ...prevState,
       [key]: dynObj,
 
     }));
   }
-
-
-  // function checkValidation(data, key) {
-  //   setTask((prevState) => ({
-  //     ...prevState,
-  //     description: data.target.value,
-  //     date: data.target.value,
-  //     assignuser: data.target.value
-
-  //   }));
-  // }
-
-  // const chooseTime = (data) => {
-  //   setTask((prevState) => ({
-  //     ...prevState,
-  //     time: data
-  //   }));
-  //   setShowDropdown(false)
-  // }
 
   const chooseTime = (data) => {
     task.time.value = data
@@ -107,11 +84,46 @@ function App(props) {
     setShowtask(true)
   }
 
+  const TimeDropdownGenerate = () => {
+    // Push Am Times
+    let timeOptionsam = ["12:00 AM", "12:30 AM"]
+    let startHouram = 0
+    let startMinam = 30
+    for (let i = 0; i < 22; i++) {
+      if (startMinam % 30 === 0 && startMinam !== 0) {
+        timeOptionsam.push((startHouram + 1) + ":00 AM")
+        startMinam = 0
+        startHouram += 1
+      } else {
+        timeOptionsam.push((startHouram) + ":" + (startMinam + 30) + " AM")
+        startMinam = 30
+      }
+
+    }
+
+    // Push Pm Times
+    let timeOptionspm = ["12:00 PM", "12:30 PM"]
+    let startHourpm = 0
+    let startMinpm = 30
+    for (let i = 0; i < 23; i++) {
+      if (startMinpm % 30 === 0 && startMinpm !== 0) {
+        timeOptionspm.push((startHourpm + 1) + ":00 PM")
+        startMinpm = 0
+        startHourpm += 1
+      } else {
+        timeOptionspm.push((startHourpm) + ":" + (startMinpm + 30) + " PM")
+        startMinpm = 30
+      }
+
+    }
+    setTimeOption(timeOptionsam.concat(timeOptionspm))
+  }
+
   const viewDropdown = () => {
+    TimeDropdownGenerate()
     setShowDropdown(true)
 
   }
-
 
   const onsubmit = useCallback((data, taskLists) => {
     var hms = task.time.value;
@@ -131,13 +143,12 @@ function App(props) {
       alert("Time Field Required")
       return
     }
-    console.log(taskList, "taskist")
 
     if (data === "update") {
       setUpdatebtn(false)
       dispatch(updateTask(taskList[indexrow].id, UserId, task, seconds))
     } else {
-      dispatch(addTask(UserId, task, seconds, AccessToken))
+      dispatch(addTask(UserId, task, seconds))
     }
     setShowtask(false)
     setRemove(false)
@@ -171,7 +182,7 @@ function App(props) {
 
     let customtime = new Date(taskList[id].task_time * 1000).toISOString().substr(11, 8).slice(0, -3)
     let timeFormat = customtime.split(':')
-    let updatetime = timeFormat[0] >= 12 ? "pm" : "am"
+    let updatetime = timeFormat[0] >= 12 ? "PM" : "AM"
     let showTime = customtime + " " + updatetime
 
     task.description.value = taskList[id].task_msg
@@ -194,13 +205,16 @@ function App(props) {
     setShowAddtask(true)
   }
   return (
-    <div className="container">
+    <div className="container" onClick={showDropdown ? () => setShowDropdown(!showDropdown) : null}>
       <div className="leftBorder" />
       <div className="taskHeaderContainer">
         <div className="header" />
         <div className="taskContainer">
           <div className="taskDescription">
-            <div className="descriptionBox">TASKS  {taskList.length} </div>
+            <div className="descriptionBox">
+              <div className="descrippName" >TASKS  </div>
+              <div className="taskincreament">{taskList.length}</div>
+            </div>
             <div className="btnAdd tooltip" onClick={addTasks}>+
               <span className="tooltiptext addTaskPosition">New Task</span>
             </div>
@@ -219,7 +233,7 @@ function App(props) {
                   <label className="taskName">Date</label>
                   <div className="dateView">
                     <div className="timeiconView"><img className="clockIcon" src={Calender} /></div>
-                    <input className="taskDate" type="date" placeholder="" onChange={(e) => checkValidation(e, "date")} value={task.date.value} />
+                    <input className="taskDate" type="date" placeholder="" data-date-open-on-focus="true" data-date-inline-picker="true" onChange={(e) => checkValidation(e, "date")} value={task.date.value} />
                   </div>
                 </div>
                 <div className="fielddateView">
@@ -229,21 +243,18 @@ function App(props) {
                     <div className="menu-bar-item" >
                       <div className="menu-bar-link" type="time" onClick={viewDropdown} >
                         <div className="timeiconView"><img className="clockIcon" src={Clock} /></div>
-                        <input className="taskTime" onChange={() => checkValidation(task.time.value, "time")} value={task.time.value} onClick={viewDropdown} />
-
+                        <input className="taskTime" value={task.time.value} onClick={viewDropdown} />
                       </div>
-
                       <div className={"mega-menu" + " " + showDropdown}>
                         <div className="dropdownContent">
                           <div className="dropdownlabel">Time</div>
-                          <div className="timeContainer">
-                            {timeFormat.map((data, index) => {
+                          <div className="timeContainer timeOptionArrow">
+                            <div>{timeOption.map((data) => {
                               return (
                                 <div className="viewTimings" onClick={() => chooseTime(data)}>{data}</div>
                               )
-                            })}
+                            })} </div>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -254,6 +265,7 @@ function App(props) {
               <div className="fieldView" >
                 <label className="taskName">Assign User</label>
                 <select className="tasknameInput" onChange={(e) => checkValidation(e, "assignuser")} value={task.assignuser.value} >
+                  <option>Choose..</option>
                   {assignuser.map((val) => {
                     return (
                       <option >{val.value}</option>
@@ -272,11 +284,10 @@ function App(props) {
                   <button className="saveBtn" onClick={() => onsubmit(updatebtn ? "update" : "", task)}>Save</button>
                 </div>
               </div>
-
             </div>
           }
           {showAddtask &&
-            <>
+            <div className="allTasklist">
               {taskList.map((data, index) => {
                 return (
                   <div className="addingTask" onMouseLeave={() => setShowEdit()}>
@@ -290,22 +301,21 @@ function App(props) {
                     </div>
 
                     <div className="taskicons"  >
-                      {showEdit === index ? <div className="editIcon tooltip" onClick={() => editTasklist(index)}><div className="editIconshow">✎</div>
-                        <span className="tooltiptext editTaskPosition">Edit Task</span>
-                      </div> : null}
+                      {showEdit === index ?
+                        <div className="editIcon tooltip" onClick={() => editTasklist(index)}><div className="editIconshow">✎</div>
+                          <span className="tooltiptext editTaskPosition">Edit Task</span>
+                        </div>
+                        : null}
                       <div className="bellIcon tooltip" onMouseEnter={() => handlemouseEnter(index)}>
                         <img src={Bell} />
                         <span className="tooltiptext bellTaskPosition">Snooze this Task to appear in your at a later date</span>
                       </div>
                       <img src={OkIcon} className="okIcon" />
                     </div>
-
                   </div>
                 )
-              })
-              }
-            </>
-          }
+              })}
+            </div>}
         </div>
       </div>
     </div>
