@@ -19,7 +19,7 @@ const AssignUser = [{
   user_status: "accepted"
 },
 {
-  user_id: "user_6beec459915f4507a8d2520e60e03c3e",
+  user_id: "user_6beec459915f4507a8d2520e60e03c3es",
   name: "mahotom411",
   user_status: "pending"
 }]
@@ -62,7 +62,6 @@ function App(props) {
   }, [props.GetTask])
 
   function checkValidation(data, key) {
-
     let dynObj = {
       value: data.target.value,
     };
@@ -130,7 +129,6 @@ function App(props) {
     let time = hms.slice(0, -3) + ":00"
     var a = time.split(':');
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
-    console.log(seconds, a, time, "time")
 
 
     if (task.description.value === "") {
@@ -188,7 +186,12 @@ function App(props) {
     task.description.value = taskList[id].task_msg
     task.date.value = taskList[id].task_date
     task.time.value = showTime
-    task.assignuser.value = taskList[id].assigned_user
+    AssignUser.map((data) => {
+      if (taskList[id].assigned_user === data.user_id) {
+        task.assignuser.value = data.name
+      }
+    })
+
 
     setTask((prevState) => ({
       ...prevState,
@@ -265,7 +268,7 @@ function App(props) {
               <div className="fieldView" >
                 <label className="taskName">Assign User</label>
                 <select className="tasknameInput" onChange={(e) => checkValidation(e, "assignuser")} value={task.assignuser.value} >
-                  <option>Choose..</option>
+                  <option value="" disabled selected hidden> Choose....</option>
                   {assignuser.map((val) => {
                     return (
                       <option >{val.value}</option>
