@@ -81,6 +81,7 @@ function App(props) {
     handleCancel()
     setShowAddtask(false)
     setShowtask(true)
+    setRemove(false)
   }
 
   const TimeDropdownGenerate = () => {
