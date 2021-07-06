@@ -140,6 +140,9 @@ function App(props) {
     } else if (task.time.value === "") {
       alert("Time Field Required")
       return
+    } else if (task.assignuser.value === "") {
+      alert("Assign User Field Required")
+      return
     }
 
     if (data === "update") {
