@@ -37,6 +37,7 @@ function App(props) {
   const [indexrow, setIndexrow] = useState()
   const [showDropdown, setShowDropdown] = useState(false)
   const [timeOption, setTimeOption] = useState([])
+  const [count, setCount] = useState(0)
   const [task, setTask] = useState({
     description: { value: "" },
     date: { value: "" },
@@ -125,7 +126,7 @@ function App(props) {
 
   }
 
-  const onsubmit = useCallback((data, taskLists) => {
+  const onsubmit = useCallback((data) => {
     var hms = task.time.value;
     let time = hms.slice(0, -3) + ":00"
     var a = time.split(':');
@@ -211,6 +212,13 @@ function App(props) {
     setShowtask(false)
     setShowAddtask(true)
   }
+  const increament = () => {
+    setCount(count + 1)
+  }
+
+  const deccreament = () => {
+    setCount(count - 1)
+  }
   return (
     <div className="container" onClick={showDropdown ? () => setShowDropdown(!showDropdown) : null}>
       <div className="leftBorder" />
@@ -293,6 +301,10 @@ function App(props) {
               </div>
             </div>
           }
+          {count}
+
+          <button onClick={increament}>Increament</button>
+          <button onClick={deccreament}>DEcreament</button>
           {showAddtask &&
             <div className="allTasklist">
               {taskList.map((data, index) => {

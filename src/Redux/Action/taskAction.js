@@ -4,7 +4,7 @@ import { apiurl } from '../Utils/baseurl';
 const AccessTokens = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjUyNDAzMTEsIm5iZiI6MTYyNTI0MDMxMSwianRpIjoiZjNlYjgzYTgtMjM4Ny00ZDM5LWIwYmEtNDZlZmU1MGZhZThlIiwiaWRlbnRpdHkiOnsibmFtZSI6IlN1YmkgU2lyIiwiZW1haWwiOiJzbWl0aGNoZXJ5bEB5YWhvby5jb20iLCJ1c2VyX2lkIjoidXNlcl82YmVlYzQ1OTkxNWY0NTA3YThkMjUyMGU2MGUwM2MzZSIsImNvbXBhbnlfaWQiOiJjb21wYW55XzNjNjhjZDk0ZWJkNjQ4Yzc4ZDc2ODcyY2ZhOWY4Y2ZiIiwiaWNvbiI6Imh0dHA6Ly93d3cuZ3JhdmF0YXIuY29tL2F2YXRhci9mMmU5YWNkZWM4MTdlMjRkMjk4MGQ4NTNlODkzODVmNT9kZWZhdWx0PWh0dHBzJTNBJTJGJTJGczMuc2xvb3ZpLmNvbSUyRmF2YXRhci1kZWZhdWx0LWljb24ucG5nIiwiYnlfZGVmYXVsdCI6Im91dHJlYWNoIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.pQSfEzNzYv_IVtPFkUKFucl1SSIqpmKnx4Jlxdhi7IY";
 
 export const addTask = (UserId, task, seconds) => async dispatch => {
-    console.log(UserId, "AccessToken")
+    console.log("acton")
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -27,7 +27,6 @@ export const addTask = (UserId, task, seconds) => async dispatch => {
     fetch(apiurl, requestOptions)
         .then(res => {
             dispatch(getAddtask())
-
         })
 }
 
@@ -91,6 +90,14 @@ export const deleteTask = (index) => async dispatch => {
         })
 }
 
+
+
+
+export const fetdata = () => async dispatch => {
+    fetch("https://jsonplaceholder.typicode.com/")
+        .then(res => {
+        })
+}
 
 
 
