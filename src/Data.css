@@ -1,0 +1,49 @@
+.container{
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 2% 0 2% 4%;
+    background-color: #1d1d1d;
+}
+
+.imageView{
+    width: 250px;
+    margin: 10px;
+}
+
+.imageText{
+    margin: 10px;
+   background-color: white;
+   position: relative;
+}
+
+.imageTitle{
+    font-weight: bold;   
+    padding-left: 10px; 
+}
+
+.imageText:hover{
+    background-color: rgb(42, 180, 42);
+
+}
+
+.img__description {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    text-decoration: transparent;
+  
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+  }
+  
+  .imageText:hover .img__description {
+    visibility: visible;
+    opacity: 1.0;
+
+  }
+

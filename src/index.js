@@ -8,8 +8,8 @@ import Data from './Data.js'
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <Data />, */}
-    <App />,
+    <Data />,
+    {/* <App />, */}
   </Provider>,
   document.getElementById('root')
 );

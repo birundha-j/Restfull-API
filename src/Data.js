@@ -1,34 +1,50 @@
 import react, { useEffect, useState } from 'react';
+import './Data.css';
+import Tomorrow from './Images/tomorrow.jpg'
 
 export default function Fetchdata() {
     const [showData, setShowData] = useState([])
 
-    const fetchData = () => {
-        fetch("https://jsonplaceholder.typicode.com/")
-            .then(res => {
-            })
-    }
+    // const fetchData = () => {
+    //     fetch("https://jsonplaceholder.typicode.com/")
+    //         .then(res => {
+    //         })
+    // }
 
     useEffect(() => {
         displaydata()
     }, [])
 
     const displaydata = () => {
-        fetch("https://jsonplaceholder.typicode.com/users")
-            .then(response => response.json())
-            .then(resp => {
-                setShowData(resp)
-            }
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        fetch("https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US&page=1", requestOptions)
+            .then((response) => response.json())
+            .then(
+                res => setShowData(res.results)
             )
-
-
     }
+
+    // const displaydata = () => {
+    //     fetch("https://jsonplaceholder.typicode.com/users")
+    //         .then(response => response.json())
+    //         .then(resp => {
+    //             setShowData(resp)
+    //         }
+    //         )
+
+
+    // }
 
     console.log(showData, "fetch")
 
     return (
-        <div>
-            <button onClick={fetchData}>Fetch</button>
+        <div className="container">
+            {/* <button onClick={fetchData}>Fetch</button>
 
             <table>
                 <tr>
@@ -52,7 +68,25 @@ export default function Fetchdata() {
                         </tr>
                     )
                 })}
-            </table>
+            </table> */}
+            {/* <div className="imageTitle">The Tomorrow War</div>
+
+            <div className="imageText">
+                <img src={Tomorrow} className="imageView" />
+                <div className="imageTitle">Rating</div>
+            </div> */}
+
+            {showData.map((data) => {
+                return (
+                    <div>
+                        <div>{data.title}</div>
+                        <div className="imageText">
+                            <img src={"https://image.tmdb.org/t/p/original" + data.poster_path} className="imageView" />
+                            <div className="img__description">Rating</div>
+                        </div>
+                    </div>
+                )
+            })}
         </div>
     )
 }
