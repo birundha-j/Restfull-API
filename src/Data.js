@@ -1,9 +1,12 @@
-import react, { useEffect, useState } from 'react';
+import react, { useCallback, useEffect, useState } from 'react';
 import './Data.css';
-import Tomorrow from './Images/tomorrow.jpg'
+import Back from './Images/backbutton.png'
 
 export default function Fetchdata() {
     const [showData, setShowData] = useState([])
+    const [specificMovie, setSpecificMovie] = useState(false)
+    const [movieDetails, setMoviewDetails] = useState({})
+    const [showStar, setShowStar] = useState([])
 
     // const fetchData = () => {
     //     fetch("https://jsonplaceholder.typicode.com/")
@@ -29,6 +32,17 @@ export default function Fetchdata() {
             )
     }
 
+
+    const viewDetails = useCallback((data) => {
+        setMoviewDetails(data)
+        setSpecificMovie(true)
+    }, [specificMovie, movieDetails])
+
+    const changeStart = useCallback((data) => {
+        setShowStar([...showStar, data])
+
+    }, [showStar])
+
     // const displaydata = () => {
     //     fetch("https://jsonplaceholder.typicode.com/users")
     //         .then(response => response.json())
@@ -43,7 +57,7 @@ export default function Fetchdata() {
     console.log(showData, "fetch")
 
     return (
-        <div className="container">
+        <div >
             {/* <button onClick={fetchData}>Fetch</button>
 
             <table>
@@ -75,18 +89,52 @@ export default function Fetchdata() {
                 <img src={Tomorrow} className="imageView" />
                 <div className="imageTitle">Rating</div>
             </div> */}
+            <div className="container">
+                <div>Favorites</div>
+                {specificMovie === false && <>
+                    {showData.map((data, index) => {
+                        return (
+                            <div className="imageViewContaner">
+                                <div className="imageText">
+                                    <img src={"https://image.tmdb.org/t/p/original" + data.poster_path} className="imageView" />
+                                    <div className="img__description">
+                                        <div className="viewDetails" onClick={() => viewDetails(data)}>View Details</div>
+                                        {showStar.includes(index) ?
+                                            <div className="fillStar">★</div>
+                                            :
+                                            <div onClick={() => changeStart(index)} className="emptyStar">☆</div>}
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </>
+                }
+            </div>
 
-            {showData.map((data) => {
-                return (
+            <div className="specificMovieContainer">
+                {console.log(movieDetails, "specificMovie")}
+                {specificMovie &&
                     <div>
-                        <div>{data.title}</div>
-                        <div className="imageText">
-                            <img src={"https://image.tmdb.org/t/p/original" + data.poster_path} className="imageView" />
-                            <div className="img__description">Rating</div>
+                        <img onClick={() => setSpecificMovie(false)} src={Back} className="backBtnView" />
+                        <div className="movieDetails">
+                            <img src={"https://image.tmdb.org/t/p/original" + movieDetails.poster_path} className="singleimageView" />
+                            <div className="movieInstruction">
+                                <div className="movieName">{movieDetails.title}</div>
+                                <div className="movieVoterange">Vote Rating : {" " + movieDetails.vote_average}</div>
+                                <div className="movieVoterange">language    :{" " + movieDetails.original_language}</div>
+                                <div>
+                                    <div className="movieVoterange">overview :</div>
+                                    <div className="titleOverview">{movieDetails.overview}</div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
+                    </div>}
+            </div>
+
+
+
         </div>
     )
 }

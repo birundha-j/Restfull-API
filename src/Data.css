@@ -1,19 +1,29 @@
 .container{
     flex-wrap: wrap;
     text-align: center;
-    padding: 2% 0 2% 4%;
     background-color: #1d1d1d;
+    display: flex;
+    justify-content: center;
+    padding: 3% 5%;
+}
+
+.specificMovieContainer{
+    background-color: #1d1d1d;
+    height: 700px;
+}
+
+.imageViewContaner{
+    width: 250px;
 }
 
 .imageView{
-    width: 250px;
-    margin: 10px;
+    width: 100%;
 }
 
 .imageText{
-    margin: 10px;
-   background-color: white;
+    margin: 25px ;
    position: relative;
+   border: 4px solid white;
 }
 
 .imageTitle{
@@ -21,29 +31,94 @@
     padding-left: 10px; 
 }
 
-.imageText:hover{
-    background-color: rgb(42, 180, 42);
-
-}
-
+  
 .img__description {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: #fff;
-    visibility: hidden;
+    transition: .5s ease;
     opacity: 0;
-    text-decoration: transparent;
-  
-    /* transition effect. not necessary */
-    transition: opacity .2s, visibility .2s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .imageText:hover{
+    border: 4px solid #6ac045;
   }
   
-  .imageText:hover .img__description {
-    visibility: visible;
-    opacity: 1.0;
+.imageText:hover .imageView {
+    opacity: 0.5;
+  }
+  
+.imageText:hover .img__description {
+    opacity: 1;
+  }
+  
+.viewDetails {
+    width: 100px;
+    background-color: #6ac045;
+    color: white;
+    font-size: 15px;
+    padding: 8px 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .singleimageView{
+    width: 250px;
+    margin: 8px;
+    background-color: aliceblue;
+    padding: 3px;
+  }
+
+  .movieDetails{
+    display: flex;
+     justify-content: center;
+     margin: 8px;
 
   }
 
+  .movieInstruction{
+      margin-left: 100px;
+      width: 20%;
+
+  }
+
+  .movieName{
+      font-size: 42px;
+      color: rgb(243, 241, 241);
+      font-weight: bold;
+  }
+
+  .movieVoterange{
+      color: rgb(243, 241, 241);
+      font-size: 17px;
+      padding-top: 10px;
+  }
+
+  .titleOverview{
+      color: rgb(223, 218, 210);
+      font-size: 13px;
+      flex-wrap: wrap;
+  }
+
+  .backBtnView{
+      width: 50px;
+      border-radius: 25px;
+      cursor: pointer;
+  }
+
+  /* start rating */
+  
+  .emptyStar{
+      color: #6ac045;
+      font-size: 50px;
+      cursor: pointer;
+  }
+
+  .fillStar{
+      color: #6ac045;
+      font-size: 50px;
+  }
