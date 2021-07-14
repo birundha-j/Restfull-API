@@ -1,12 +1,17 @@
 import react, { useCallback, useEffect, useState } from 'react';
 import './Data.css';
 import Back from './Images/backbutton.png'
+import Modal from './model';
+import useModal from './usemodel';
 
 export default function Fetchdata() {
     const [showData, setShowData] = useState([])
     const [specificMovie, setSpecificMovie] = useState(false)
     const [movieDetails, setMoviewDetails] = useState({})
     const [showStar, setShowStar] = useState([])
+    const [show, setShow] = useState(false)
+    const { isShowing, toggle } = useModal();
+    const [selectMovieList, setSelectMovieList] = useState([])
 
     // const fetchData = () => {
     //     fetch("https://jsonplaceholder.typicode.com/")
@@ -38,10 +43,32 @@ export default function Fetchdata() {
         setSpecificMovie(true)
     }, [specificMovie, movieDetails])
 
-    const changeStart = useCallback((data) => {
-        setShowStar([...showStar, data])
+    const changeAddStar = useCallback((data, id) => {
+        // setShow(true)
+        selectMovieList.push(data)
+        setShowStar([...showStar, id])
+    }, [showStar, selectMovieList, show])
 
-    }, [showStar])
+    const changeRemoveStar = useCallback((data, id) => {
+        // showStar.map((data) => {
+        //     if (data === id) {
+
+        //     }
+        // })
+
+        // if (id > -1) {
+        //     alert("test")
+        //     showStar.splice(id, 1);
+        // }
+        // setShowStar([...showStar]);
+
+        setShow(false)
+    }, [showStar, selectMovieList, show])
+
+    console.log(showStar, "est")
+
+
+
 
     // const displaydata = () => {
     //     fetch("https://jsonplaceholder.typicode.com/users")
@@ -57,7 +84,7 @@ export default function Fetchdata() {
     console.log(showData, "fetch")
 
     return (
-        <div >
+        <div className="masterContainer" >
             {/* <button onClick={fetchData}>Fetch</button>
 
             <table>
@@ -89,52 +116,74 @@ export default function Fetchdata() {
                 <img src={Tomorrow} className="imageView" />
                 <div className="imageTitle">Rating</div>
             </div> */}
-            <div className="container">
-                <div className="favoritesMovies">
+            <div className="websiteHeading">Popular Movie Website</div>
+
+            <div className="favoritsList">
+                {specificMovie === false && <div className="favoritesMovies" onClick={toggle}>
                     <div>Favorites</div>
                     <div>{showStar.length}</div>
-                </div>
-                {specificMovie === false && <>
-                    {showData.map((data, index) => {
-                        return (
-                            <div className="imageViewContaner">
-                                <div className="imageText">
-                                    <img src={"https://image.tmdb.org/t/p/original" + data.poster_path} className="imageView" />
-                                    <div className="img__description">
-                                        <div className="viewDetails" onClick={() => viewDetails(data)}>View Details</div>
-                                        {showStar.includes(index) ?
-                                            <div className="fillStar">★</div>
-                                            :
-                                            <div onClick={() => changeStart(index)} className="emptyStar">☆</div>}
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </>
-                }
+                </div>}
+                <Modal
+                    isShowing={isShowing}
+                    hide={toggle}
+                    selectMovieList={selectMovieList}
+                />
             </div>
+            {specificMovie === false &&
+                <div className="container">
 
-            <div className="specificMovieContainer">
-                {console.log(movieDetails, "specificMovie")}
-                {specificMovie &&
+                    <>
+                        {showData.map((data, index) => {
+                            return (
+                                <div className="imageViewContaner">
+                                    <div className="imageText">
+                                        <img src={"https://image.tmdb.org/t/p/original" + data.poster_path} className="imageView" />
+                                        <div className="img__description">
+                                            <div className="viewDetails" onClick={() => viewDetails(data)}>View Details</div>
+                                        </div>
+                                    </div>
+                                    <div className="moviesInstruct">
+                                        <div className="moviesBar">
+                                            <div className="movietitleView">{data.title}</div>
+                                            <div className="releaseYear">{new Date(data.release_date).getFullYear()}</div>
+                                        </div>
+                                        <div className="movieStar">
+                                            {showStar.includes(index) ?
+                                                <div onClick={() => changeRemoveStar(data, index)} className="fillStar">★</div>
+                                                :
+                                                <div onClick={() => changeAddStar(data, index)} className="emptyStar">☆</div>}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            )
+                        })}
+                    </>
+
+                </div>
+            }
+            {specificMovie &&
+                <div className="specificMovieContainer">
+
                     <div>
                         <img onClick={() => setSpecificMovie(false)} src={Back} className="backBtnView" />
                         <div className="movieDetails">
                             <img src={"https://image.tmdb.org/t/p/original" + movieDetails.poster_path} className="singleimageView" />
                             <div className="movieInstruction">
                                 <div className="movieName">{movieDetails.title}</div>
-                                <div className="movieVoterange">Vote Rating : {" " + movieDetails.vote_average}</div>
-                                <div className="movieVoterange">language    :{" " + movieDetails.original_language}</div>
+                                <div className="movieVoterange">View Rating : {" " + movieDetails.vote_average}</div>
+                                <div className="movieVoterange">language    :{movieDetails.original_language === "en" ? "  English" : null}</div>
+                                <div className="movieVoterange">Release Year : {" " + new Date(movieDetails.release_date).getFullYear()}</div>
                                 <div>
-                                    <div className="movieVoterange">overview :</div>
+                                    <div className="movieVoterange">Description :</div>
                                     <div className="titleOverview">{movieDetails.overview}</div>
                                 </div>
 
                             </div>
                         </div>
-                    </div>}
-            </div>
+                    </div>
+                </div>
+            }
 
 
 

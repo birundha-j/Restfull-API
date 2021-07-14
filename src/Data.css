@@ -1,3 +1,8 @@
+.masterContainer{
+    background-color: #1d1d1d;
+    width: 100%;
+}
+
 .container{
     flex-wrap: wrap;
     text-align: center;
@@ -16,12 +21,18 @@
     width: 250px;
 }
 
+.imageTextview{
+    margin: 25px 25px 0px 25px;
+    position: relative;
+    border: 4px solid white;
+}
+
 .imageView{
     width: 100%;
 }
 
 .imageText{
-    margin: 25px ;
+    margin: 25px 25px 0px 25px;
    position: relative;
    border: 4px solid white;
 }
@@ -29,6 +40,34 @@
 .imageTitle{
     font-weight: bold;   
     padding-left: 10px; 
+}
+
+.moviesInstruct{
+    display: flex;
+    width: 200px;
+    margin-left: 25px;
+    padding-top: 10px;
+    justify-content: space-between;
+} 
+
+.movietitleView{
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.moviesBar{
+    text-align: start;
+}
+
+.movieStar{
+    position: relative;
+    bottom: 10px;
+}
+
+.releaseYear{
+    color: #7e7d7d;
+    font-size: 13px;
 }
 
   
@@ -114,16 +153,132 @@
   
   .emptyStar{
       color: #6ac045;
-      font-size: 50px;
+      font-size: 30px;
       cursor: pointer;
   }
 
   .fillStar{
       color: #6ac045;
-      font-size: 50px;
+      font-size: 30px;
+      cursor: pointer;
   }
   .favoritesMovies{
-      color: azure;
+      width: 100px;
       display: flex;
-      justify-content: end;
+      justify-content: space-between;
+      background-color: #6ac045;
+      color: white;
+      font-size: 15px;
+      padding: 8px 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 5px;
+  }
+
+  .favoritsList{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 60px 0px 0px;
+  }
+
+
+  /* Model */
+  /* body {
+    height: 100vh;
+    overflow-y: hidden;
+    padding-right: 15px; /* Avoid width reflow */
+  /* }
+
+  body .modal-wrapper {
+    height: 100vh;
+    overflow-y: hidden;
+  } */ */
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity: .5;
+  }
+  
+  .modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+  }
+  
+  .modal {
+    z-index: 100;
+    background: #1d1d1d;
+    position: relative;
+    margin: 5% auto;
+    border-radius: 3px;
+    max-width: 55%;
+    padding: 0px 2rem 2rem 2rem;
+    color: white;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    top: 38px;
+  }
+  
+  .modal-close-button {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    opacity: .3;
+    cursor: pointer;
+    border: none;
+  }
+  
+  button {
+    font-size: .9rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+    padding: .3rem 1rem;
+    margin-left: .5rem;
+  }
+  
+  .button-default {
+    background: #247BA0;
+    color: #fff;
+  }
+
+  /* Favorite List */
+
+  .modelHeading{
+    text-align: center;
+    font-size: 30px;
+    color: #6dc847;
+    font-weight: 500;
+    border-bottom: 1px solid #4e6b41;
+    padding-bottom: 10px;
+    /* position: relative;
+    bottom: 35px; */
+  }
+
+  /* websiteHeading */
+
+  .websiteHeading{
+      color: #fff;
+      text-align: center;
+      font-size: 35px;
+      font-weight: bold;
+      padding: 10px;
+      border-bottom: 1px solid rgb(128, 128, 128);
   }
