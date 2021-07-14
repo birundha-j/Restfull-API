@@ -122,3 +122,8 @@
       color: #6ac045;
       font-size: 50px;
   }
+  .favoritesMovies{
+      color: azure;
+      display: flex;
+      justify-content: end;
+  }

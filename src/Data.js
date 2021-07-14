@@ -90,7 +90,10 @@ export default function Fetchdata() {
                 <div className="imageTitle">Rating</div>
             </div> */}
             <div className="container">
-                <div>Favorites</div>
+                <div className="favoritesMovies">
+                    <div>Favorites</div>
+                    <div>{showStar.length}</div>
+                </div>
                 {specificMovie === false && <>
                     {showData.map((data, index) => {
                         return (
