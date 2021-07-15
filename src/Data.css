@@ -279,8 +279,13 @@
   }
 
   /* websiteHeading */
+/* .logoView{
+  width: 65px;
+  position: relative;
+  top: 10px;
+} */
 
-  .websiteHeading{
+.websiteHeading{
       color: #fff;
       text-align: center;
       font-size: 35px;

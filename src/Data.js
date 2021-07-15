@@ -3,6 +3,7 @@ import './Data.css';
 import Back from './Images/backbutton.png'
 import Modal from './model';
 import useModal from './usemodel';
+import Logo from './Images/logos.jpg'
 
 export default function Fetchdata() {
     const [showData, setShowData] = useState([])
@@ -124,7 +125,11 @@ export default function Fetchdata() {
                 <img src={Tomorrow} className="imageView" />
                 <div className="imageTitle">Rating</div>
             </div> */}
-            <div className="websiteHeading">Popular Movie Website</div>
+            <div>
+                {/* <img src={Logo} className="logoView" /> */}
+                <div className="websiteHeading">Popular Movie Website</div>
+
+            </div>
 
             <div className="favoritsList">
                 {specificMovie === false && <div className="favoritesMovies" onClick={toggle}>
