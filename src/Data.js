@@ -9,9 +9,11 @@ export default function Fetchdata() {
     const [specificMovie, setSpecificMovie] = useState(false)
     const [movieDetails, setMoviewDetails] = useState({})
     const [showStar, setShowStar] = useState([])
-    const [show, setShow] = useState(false)
+    const [loader, setLoader] = useState(true)
     const { isShowing, toggle } = useModal();
     const [selectMovieList, setSelectMovieList] = useState([])
+
+
 
     // const fetchData = () => {
     //     fetch("https://jsonplaceholder.typicode.com/")
@@ -20,7 +22,7 @@ export default function Fetchdata() {
     // }
 
     useEffect(() => {
-        displaydata()
+        demoAsyncCall().then(() => displaydata())
     }, [])
 
     const displaydata = () => {
@@ -33,8 +35,15 @@ export default function Fetchdata() {
         fetch("https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US&page=1", requestOptions)
             .then((response) => response.json())
             .then(
-                res => setShowData(res.results)
+                res => {
+                    setShowData(res.results)
+                    setLoader(false)
+                }
             )
+    }
+
+    function demoAsyncCall() {
+        return new Promise((resolve) => setTimeout(() => resolve(), 1000));
     }
 
 
@@ -44,28 +53,26 @@ export default function Fetchdata() {
     }, [specificMovie, movieDetails])
 
     const changeAddStar = useCallback((data, id) => {
-        // setShow(true)
         selectMovieList.push(data)
         setShowStar([...showStar, id])
-    }, [showStar, selectMovieList, show])
+    }, [showStar, selectMovieList])
 
     const changeRemoveStar = useCallback((data, id) => {
-        // showStar.map((data) => {
-        //     if (data === id) {
+        if (id > -1) {
+            showStar.splice(id, 1);
+        }
+        setShowStar([...showStar]);
 
-        //     }
-        // })
+        const reducedArr = selectMovieList.filter((item, itemIndex) => {
+            return itemIndex !== id
+        })
 
-        // if (id > -1) {
-        //     alert("test")
-        //     showStar.splice(id, 1);
-        // }
-        // setShowStar([...showStar]);
+        setSelectMovieList(reducedArr)
 
-        setShow(false)
-    }, [showStar, selectMovieList, show])
 
-    console.log(showStar, "est")
+    }, [showStar, selectMovieList])
+
+    console.log(selectMovieList, "est")
 
 
 
@@ -85,6 +92,7 @@ export default function Fetchdata() {
 
     return (
         <div className="masterContainer" >
+            {loader && <div className="loader"></div>}
             {/* <button onClick={fetchData}>Fetch</button>
 
             <table>
